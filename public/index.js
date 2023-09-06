@@ -61,17 +61,21 @@ async function setBody() {
  - select category of food?
     -
 */
-function setScore() {
+export function createButtons() {
     //add score counter
     const upvote = document.createElement("button");
     const downvote = document.createElement("button");
+    const buttons = document.createElement("div");
 
     upvote.innerText = "🤤";
     downvote.innerText = "🤮"
 
-    const buttons = document.createElement("div");
-    document.body.append(buttons)
-    buttons.append(upvote, downvote)
+    upvote.setAttribute('id', "upvote")
+    downvote.setAttribute('id', "downvote")
+    buttons.setAttribute('class', "popularity");
+
+    document.body.append(buttons);
+    buttons.append(upvote, downvote);
 }
 
 function setComments() {
@@ -81,6 +85,6 @@ function setComments() {
 window.onload = async () => {
     setTitle();
     await setBody();
-    setScore();
+    createButtons();
     setComments();
 }
