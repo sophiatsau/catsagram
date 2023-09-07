@@ -83,14 +83,21 @@ export function filterFood() {
 
         const {img, mealName} = meal;
 
-        const oldUpvoteScore = document.getElementById('upvoteScore');
-        const oldDownvoteScore = document.getElementById('downvoteScore');
+        //resetting page
         oldImage.src = img;
         oldHeader.innerText = mealName;
+
+        //resetting score
+        const oldUpvoteScore = document.getElementById('upvoteScore');
+        const oldDownvoteScore = document.getElementById('downvoteScore');
         oldUpvoteScore.innerText=0;
         oldDownvoteScore.innerText=0;
         buttonData.upvote.votes = 0;
         buttonData.downvote.votes = 0;
+
+        //resetting comments
+        const oldComments = document.querySelectorAll('.comments');
+        oldComments.forEach(comment => comment.remove());
     })
 }
 
