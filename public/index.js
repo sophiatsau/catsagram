@@ -61,30 +61,75 @@ async function setBody() {
  - select category of food?
     -
 */
-export function createButtons() {
+function createButtons() {
     //add score counter
+    const upvoteDiv = document.createElement('div');
+    const downvoteDiv = document.createElement('div');
     const upvote = document.createElement("button");
     const downvote = document.createElement("button");
     const buttons = document.createElement("div");
+    const upvoteScore = document.createElement('p');
+    const downvoteScore = document.createElement('p');
+
 
     upvote.innerText = "🤤";
-    downvote.innerText = "🤮"
+    downvote.innerText = "🤮";
+    upvoteScore.innerText = '0';
+    downvoteScore.innerText = '0';
 
-    upvote.setAttribute('id', "upvote")
-    downvote.setAttribute('id', "downvote")
+    upvoteScore.setAttribute('id','upvoteScore');
+    downvoteScore.setAttribute('id','downvoteScore');
+    upvote.setAttribute('id', "upvote");
+    downvote.setAttribute('id', "downvote");
     buttons.setAttribute('class', "popularity");
 
     document.body.append(buttons);
-    buttons.append(upvote, downvote);
+    buttons.append(upvoteDiv, downvoteDiv);
+    upvoteDiv.append(upvoteScore,upvote);
+    downvoteDiv.append(downvote,downvoteScore);
+
+    buttons.style.display = 'flex';
+    buttons.style.flexDirection = 'row';
+    upvoteDiv.style.display = 'flex';
+    upvoteDiv.style.flexDirection = 'row';
+    downvoteDiv.style.display = 'flex';
+    downvoteDiv.style.flexDirection = 'row';
 }
 
-function setComments() {
+function incrementScore() {
+    let upvotes = 0, downvotes = 0;
+    //struggling to incorporate this separately in scores.js - look at that file for more details!
+    const popularity = document.getElementsByClassName('popularity')[0];
+    popularity.addEventListener("click", clickEvent => {
+        if (clickEvent.target.id==="upvote") {
+            upvotes++;
+            let score = document.getElementById('upvoteScore');
+            score.innerText = upvotes;
+
+        }
+        if (clickEvent.target.id==="downvote") {
+            downvotes++;
+            let score = document.getElementById('downvoteScore');
+            score.innerText = downvotes;
+        }
+    })
 
 }
 
-window.onload = async () => {
+// function setComments() {
+
+// }
+
+// window.onload = async () => {
+//     setTitle();
+//     await setBody();
+//     createButtons();
+//     // setComments();
+// }
+
+window.addEventListener('DOMContentLoaded', async () => {
     setTitle();
     await setBody();
-    createButtons();
-    setComments();
-}
+    await createButtons();
+    incrementScore();
+})
