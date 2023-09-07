@@ -87,20 +87,19 @@ function createButtons() {
     downvoteDiv.style.display = 'flex';
     downvoteDiv.style.flexDirection = 'row';
     popularity.style.gap = "10px";
+    popularity.style.marginBottom = "20px";
 
     popularity.style.fontSize = "36px";
-    upvote.style.fontSize = "36px";
-    downvote.style.fontSize = "36px";
+    upvote.style.fontSize = "70px";
+    downvote.style.fontSize = "70px";
 
     upvote.style.borderRadius = "50%";
     downvote.style.borderRadius = "50%";
 
-    upvote.style.width = "auto";
-    downvote.style.width = "auto";
-    upvote.style.height = "width";
-    downvote.style.height = "width";
-    upvote.style.padding = "0";
-    downvote.style.padding = "0";
+    upvote.style.border = "none";
+    downvote.style.border = "none";
+    upvote.style.backgroundColor = "transparent";
+    downvote.style.backgroundColor = "transparent";
     upvote.style.boxSizing = "border-box";
     downvote.style.boxSizing = "border-box";
 }
@@ -117,8 +116,6 @@ window.addEventListener('DOMContentLoaded', async () => {
     await createCommentsSection()
 
     //set event listeners
-    incrementScore();
-    addComment();
-
     setButtonFunctions();
+    addComment();
 })

@@ -1,5 +1,13 @@
 let upvotes = 0, downvotes = 0;
 
+const yumAudio = new Audio("/assets/yum.mp3");
+const barfAudio = new Audio("/assets/vomit.mp3");
+
+let buttonFunctions = {
+    upvote: {votes: 0, audio: new Audio("/assets/yum.mp3")},
+    downvote: {votes: 0, audio: new Audio("/assets/vomit.mp3")}
+}
+
 export function setButtonFunctions() {
     const popularity = document.getElementById('popularity');
 
@@ -24,9 +32,6 @@ function incrementScore(vote) {
 }
 
 function playAudio(vote) {
-    const yumAudio = new Audio("/assets/yum.mp3");
-    const barfAudio = new Audio("/assets/vomit.mp3");
-
     if (vote==="upvote") {
         yumAudio.play();
     }
