@@ -1,4 +1,4 @@
-import { incrementScore } from "./buttonFunctions.js";
+import { setButtonFunctions } from "./buttonFunctions.js";
 import { createCommentsSection, addComment } from "./comments.js";
 //import from comments
 //import from newFoodButton
@@ -103,4 +103,5 @@ window.addEventListener('DOMContentLoaded', async () => {
     incrementScore();
     addComment();
 
+    setButtonFunctions();
 })

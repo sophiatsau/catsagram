@@ -1,18 +1,36 @@
-export function incrementScore() {
-    let upvotes = 0, downvotes = 0;
-    //struggling to incorporate this separately in scores.js - look at that file for more details!
-    const popularity = document.getElementById('popularity');
-    popularity.addEventListener("click", clickEvent => {
-        if (clickEvent.target.id==="upvote") {
-            upvotes++;
-            let score = document.getElementById('upvoteScore');
-            score.innerText = upvotes;
+let upvotes = 0, downvotes = 0;
 
-        }
-        if (clickEvent.target.id==="downvote") {
-            downvotes++;
-            let score = document.getElementById('downvoteScore');
-            score.innerText = downvotes;
-        }
+export function setButtonFunctions() {
+    const popularity = document.getElementById('popularity');
+
+    popularity.addEventListener("click", clickEvent => {
+        const vote = clickEvent.target.id
+        incrementScore(vote);
+        playAudio(vote);
     })
+}
+
+function incrementScore(vote) {
+    if (vote==="upvote") {
+        upvotes++;
+        let score = document.getElementById('upvoteScore');
+        score.innerText = upvotes;
+    }
+    if (vote==="downvote") {
+        downvotes++;
+        let score = document.getElementById('downvoteScore');
+        score.innerText = downvotes;
+    }
+}
+
+function playAudio(vote) {
+    const yumAudio = new Audio("/assets/yum.mp3");
+    const barfAudio = new Audio("/assets/vomit.mp3");
+
+    if (vote==="upvote") {
+        yumAudio.play();
+    }
+    if (vote==="downvote") {
+        barfAudio.play();
+    }
 }
