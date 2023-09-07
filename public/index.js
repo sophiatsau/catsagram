@@ -1,31 +1,25 @@
-// Your code here
+import { incrementScore } from "./buttonFunctions.js";
+//import from comments
+//import from newFoodButton
 
-    //tags for recipe:
-        //strArea - cuisine?
-        //strCategory
-
-        //strInstructions
-    //list of ingredients
-        //"strIngredient<number>"
-    //correspond to measure of Ingredients
-        //"strMeasure<number>"
-    //video of recipe:
-        //strYoutube
-    //link for source of recipe:
-        //strSource
-        //button for link
+//food video, recipes on the sides?
 
 //get random image url
 async function randomMeal() {
-    const meal = await fetch("https://www.themealdb.com/api/json/v1/1/random.php");
+    // add try catch block
+    try {
+        const meal = await fetch("https://www.themealdb.com/api/json/v1/1/random.php");
 
-    const body = await meal.json();
-    const meals = body.meals[0]
-    const img = meals.strMealThumb;
-    const mealName = meals.strMeal;
-    // Object.entries(body.meals[0]).forEach(entry => console.log(entry))
-
-    return {img, mealName};
+        const body = await meal.json();
+        const meals = body.meals[0];
+        const img = meals.strMealThumb;
+        const mealName = meals.strMeal;
+        return {img, mealName};
+    } catch (e) {
+        console.error("Failed to fetch a meal");
+        return {img:"failed to fetch",
+                mealName: "failed to fetch"};
+    }
 }
 
 function setTitle() {
@@ -46,7 +40,7 @@ async function setBody() {
     div.append(h1,mealImg);
     document.body.appendChild(div);
 
-    document.querySelectorAll("body *").forEach(child => child.style.boxSizing = "border-box");
+    // document.querySelectorAll("body *").forEach(child => child.style.boxSizing = "border-box");
 
     document.body.style.display = "flex";
     document.body.style.flexDirection = "column";
@@ -57,9 +51,6 @@ async function setBody() {
 }
 
 /* BUTTONS
- - get new recipe button
- - select category of food?
-    -
 */
 function createButtons() {
     //add score counter
@@ -81,7 +72,7 @@ function createButtons() {
     downvoteScore.setAttribute('id','downvoteScore');
     upvote.setAttribute('id', "upvote");
     downvote.setAttribute('id', "downvote");
-    buttons.setAttribute('class', "popularity");
+    buttons.setAttribute('id', "popularity");
 
     document.body.append(buttons);
     buttons.append(upvoteDiv, downvoteDiv);
@@ -96,40 +87,16 @@ function createButtons() {
     downvoteDiv.style.flexDirection = 'row';
 }
 
-function incrementScore() {
-    let upvotes = 0, downvotes = 0;
-    //struggling to incorporate this separately in scores.js - look at that file for more details!
-    const popularity = document.getElementsByClassName('popularity')[0];
-    popularity.addEventListener("click", clickEvent => {
-        if (clickEvent.target.id==="upvote") {
-            upvotes++;
-            let score = document.getElementById('upvoteScore');
-            score.innerText = upvotes;
+// function createCommentsSection() {
 
-        }
-        if (clickEvent.target.id==="downvote") {
-            downvotes++;
-            let score = document.getElementById('downvoteScore');
-            score.innerText = downvotes;
-        }
-    })
-
-}
-
-// function setComments() {
-
-// }
-
-// window.onload = async () => {
-//     setTitle();
-//     await setBody();
-//     createButtons();
-//     // setComments();
 // }
 
 window.addEventListener('DOMContentLoaded', async () => {
+    //set HTML elements
     setTitle();
     await setBody();
-    await createButtons();
+    createButtons();
+
+    //set event listeners
     incrementScore();
 })
