@@ -1,4 +1,5 @@
 // default: all food
+import {buttonData} from './buttonData.js';
 
 export function createNewFoodContainer() {
     const container = document.createElement('container');
@@ -88,6 +89,8 @@ export function filterFood() {
         oldHeader.innerText = mealName;
         oldUpvoteScore.innerText=0;
         oldDownvoteScore.innerText=0;
+        buttonData.upvote.votes = 0;
+        buttonData.downvote.votes = 0;
     })
 }
 
