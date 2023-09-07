@@ -1,4 +1,6 @@
 // default: all food
+import { randomMeal } from "./index.js";
+
 export function createNewFoodContainer() {
     const container = document.createElement('container');
     container.setAttribute('id','newFoodContainer');
@@ -73,10 +75,25 @@ export function filterFood() {
 
     getNewFood.addEventListener('click', async () => {
         const selection = document.getElementById('dropdownFilter').value;
+        const oldImage = document.querySelector('img');
+        const oldHeader = document.querySelector('h1');
+        let img = oldImage;
+        let mealName = oldHeader;
 
         if (selection === 'All') {
-
+            const meal = await randomMeal();
+            img = meal.img;
+            mealName = meal.mealName;
         }
+        else if (selection ===) {}
+
+
+        const oldUpvoteScore = document.getElementById('upvoteScore');
+        const oldDownvoteScore = document.getElementById('downvoteScore');
+        oldImage.src = img;
+        oldHeader.innerText = mealName;
+        oldUpvoteScore.innerText=0;
+        oldDownvoteScore.innerText=0;
     })
 }
 
