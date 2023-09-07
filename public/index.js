@@ -1,5 +1,7 @@
-import { incrementScore } from "./buttonFunctions.js";
+
 import { createNewFoodContainer,createNewFoodButton, createFilterDropdown,filterFood } from "./newFoodButton.js";
+import { setButtonFunctions } from "./buttonFunctions.js";
+import { createCommentsSection, addComment } from "./comments.js";
 
 //import from comments
 //import from newFoodButton
@@ -102,6 +104,9 @@ window.addEventListener('DOMContentLoaded', async () => {
     await createFilterDropdown();
     await createNewFoodButton();
     //set event listeners
-    incrementScore();
     filterFood();
+    await createCommentsSection()
+    addComment();
+
+    setButtonFunctions();
 })
