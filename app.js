@@ -34,6 +34,7 @@ const server = http.createServer((req, res) => {
     // Serving Static Assets
     const ext = path.extname(req.url);
     if (req.method === "GET" && ext) {
+      console.log("fetching asset ending with", ext, "with url", req.url)
       try {
         const resBody = readFileSync('.' + "/public" + req.url);
         res.statusCode = 200;
@@ -43,6 +44,8 @@ const server = http.createServer((req, res) => {
           res.setHeader("Content-Type", "text/css");
         } else if (ext === ".js") {
           res.setHeader("Content-Type", "text/javascript");
+        } else if (ext === ".mp3") {
+          res.setHeader("Content-Type", "audio/mpeg")
         }
         res.end(resBody);
         return;
