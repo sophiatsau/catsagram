@@ -62,7 +62,7 @@ function createButtons() {
     const downvoteDiv = document.createElement('div');
     const upvote = document.createElement("button");
     const downvote = document.createElement("button");
-    const buttons = document.createElement("div");
+    const popularity = document.createElement("div");
     const upvoteScore = document.createElement('p');
     const downvoteScore = document.createElement('p');
 
@@ -76,19 +76,35 @@ function createButtons() {
     downvoteScore.setAttribute('id','downvoteScore');
     upvote.setAttribute('id', "upvote");
     downvote.setAttribute('id', "downvote");
-    buttons.setAttribute('id', "popularity");
+    popularity.setAttribute('id', "popularity");
 
-    document.body.append(buttons);
-    buttons.append(upvoteDiv, downvoteDiv);
+    document.body.append(popularity);
+    popularity.append(upvoteDiv, downvoteDiv);
     upvoteDiv.append(upvoteScore,upvote);
     downvoteDiv.append(downvote,downvoteScore);
 
-    buttons.style.display = 'flex';
-    buttons.style.flexDirection = 'row';
+    popularity.style.display = 'flex';
+    popularity.style.flexDirection = 'row';
     upvoteDiv.style.display = 'flex';
     upvoteDiv.style.flexDirection = 'row';
     downvoteDiv.style.display = 'flex';
     downvoteDiv.style.flexDirection = 'row';
+    popularity.style.gap = "10px";
+    popularity.style.marginBottom = "20px";
+
+    popularity.style.fontSize = "36px";
+    upvote.style.fontSize = "70px";
+    downvote.style.fontSize = "70px";
+
+    upvote.style.borderRadius = "50%";
+    downvote.style.borderRadius = "50%";
+
+    upvote.style.border = "none";
+    downvote.style.border = "none";
+    upvote.style.backgroundColor = "transparent";
+    downvote.style.backgroundColor = "transparent";
+    upvote.style.boxSizing = "border-box";
+    downvote.style.boxSizing = "border-box";
 }
 
 // function createCommentsSection() {
