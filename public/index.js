@@ -99,14 +99,13 @@ window.addEventListener('DOMContentLoaded', async () => {
     //set HTML elements
     setTitle();
     await setBody();
-    createButtons();
+    await createButtons();
     await createNewFoodContainer();
     await createFilterDropdown();
     await createNewFoodButton();
+    await createCommentsSection();
     //set event listeners
-    filterFood();
-    await createCommentsSection()
-    addComment();
-
     setButtonFunctions();
+    addComment();
+    filterFood();
 })
