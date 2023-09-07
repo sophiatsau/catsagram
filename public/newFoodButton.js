@@ -1,5 +1,4 @@
 // default: all food
-import { randomMeal } from "./index.js";
 
 export function createNewFoodContainer() {
     const container = document.createElement('container');
@@ -56,7 +55,7 @@ export function createFilterDropdown() {
     const side = document.createElement('option');
         side.setAttribute('value','Side');
     const appetizer = document.createElement('option');
-        appetizer.setAttribute('value','Appetizer');
+        appetizer.setAttribute('value','Starter');
     const vegan = document.createElement('option');
         vegan.setAttribute('value','Vegan');
     const vegetarian = document.createElement('option');
@@ -77,16 +76,11 @@ export function filterFood() {
         const selection = document.getElementById('dropdownFilter').value;
         const oldImage = document.querySelector('img');
         const oldHeader = document.querySelector('h1');
-        let img = oldImage;
-        let mealName = oldHeader;
 
-        if (selection === 'All') {
-            const meal = await randomMeal();
-            img = meal.img;
-            mealName = meal.mealName;
-        }
-        else if (selection ===) {}
 
+        const meal = await getRandomMealBasedOnFilter(selection);
+
+        const {img, mealName} = meal;
 
         const oldUpvoteScore = document.getElementById('upvoteScore');
         const oldDownvoteScore = document.getElementById('downvoteScore');
@@ -97,4 +91,40 @@ export function filterFood() {
     })
 }
 
-// new food: reset scores
+//
+async function getRandomMealBasedOnFilter(selection) {
+    let url;
+    let index;
+    let body;
+
+    //define url based on selection
+    if (selection==='All') {
+        url = "https://www.themealdb.com/api/json/v1/1/random.php";
+    } else  {
+        url = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${selection}`;
+    }
+
+    //fetch data based on selection
+    try {
+        const mealOptions = await fetch(url);
+        body = await mealOptions.json();
+    } catch (e) {
+        console.error("Failed to fetch a meal");
+        return {img:"failed to fetch",
+                mealName: "failed to fetch"};
+    }
+
+    //create index based on selection
+    if (selection==='All') {
+        index =0;
+    } else {
+        let length = body.meals.length;
+        index = Math.floor(Math.random()*length);
+    }
+
+    const meals = body.meals[index];
+    const img = meals.strMealThumb;
+    const mealName = meals.strMeal;
+    return {img, mealName};
+
+}

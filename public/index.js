@@ -9,7 +9,7 @@ import { createCommentsSection, addComment } from "./comments.js";
 //food video, recipes on the sides?
 
 //get random image url
-export async function randomMeal() {
+async function randomMeal() {
     // add try catch block
     try {
         const meal = await fetch("https://www.themealdb.com/api/json/v1/1/random.php");
