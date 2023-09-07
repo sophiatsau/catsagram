@@ -1,4 +1,5 @@
 import { setButtonFunctions } from "./buttonFunctions.js";
+import { createCommentsSection, addComment } from "./comments.js";
 //import from comments
 //import from newFoodButton
 
@@ -113,7 +114,11 @@ window.addEventListener('DOMContentLoaded', async () => {
     setTitle();
     await setBody();
     createButtons();
+    await createCommentsSection()
 
     //set event listeners
+    incrementScore();
+    addComment();
+
     setButtonFunctions();
 })
