@@ -35,7 +35,7 @@ export async function createCommentsSection(){
 
     }
     //form styling
-    form.style.border = "1px solid aquamarine" // styling for form border
+    form.style.border = "1px solid #F98869" // styling for form border
     form.style.display = 'flex'
     form.style.borderRadius = '25px'
     form.style.marginTop = '20px'
@@ -49,10 +49,12 @@ export async function createCommentsSection(){
     button.style.border = 'transparent'
     //list styling
     list.style.listStyleType = 'none'
-    list.style.border = '1px solid aquamarine'
+    list.style.border = '1px solid #F98869'
     list.style.width = '30%'
     list.style.height = 'fit-content'
     list.style.fontFamily = 'sans-serif'
+    list.style.padding = "20px";
+    list.style.backgroundColor = "#FFF3C2";
     //input styling
     input.style.border = '.25px solid lightgrey'
     input.style.borderTopLeftRadius = '25px'
