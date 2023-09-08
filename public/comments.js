@@ -21,6 +21,19 @@ export async function createCommentsSection(){
     document.body.append(form) //block
     form.append(input,button)
     document.body.append(list) //block
+
+    //restoring comments if refreshed
+    let oldComments = localStorage.getItem('commentSection');
+    if (oldComments) {
+        let commentsArray = JSON.parse(oldComments);
+        commentsArray.forEach(comment => {
+            let item = document.createElement('li');
+            item.setAttribute('class','comments')
+            item.innerText = comment;
+            list.append(item);
+        });
+
+    }
     //form styling
     form.style.border = "1px solid aquamarine" // styling for form border
     form.style.display = 'flex'
