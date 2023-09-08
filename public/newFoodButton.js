@@ -98,6 +98,13 @@ export function filterFood() {
         //resetting comments
         const oldComments = document.querySelectorAll('.comments');
         oldComments.forEach(comment => comment.remove());
+
+        //resetting storage
+        localStorage.removeItem('scoreData');
+        localStorage.removeItem('Heading');
+        localStorage.removeItem('commentSection');
+        localStorage.removeItem('filterValue');
+        localStorage.removeItem('ImageUrl');
     })
 }
 
