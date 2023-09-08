@@ -22,7 +22,9 @@ function playAudio(vote) {
     buttonData[vote].audio.play();
 }
 
-export function scoreStorage() {
-    const scoreData = { 'upvote': buttonData.upvote.votes, 'downvote':buttonData.downvote.votes }
-    localStorage.setItem('scoreData',JSON.stringify(scoreData));
+function scoreStorage() {
+    const upvote = buttonData.upvote.votes
+    const downvote = buttonData.downvote.votes
+    localStorage.setItem('upvotes',JSON.stringify(upvote));
+    localStorage.setItem('downvotes',JSON.stringify(downvote));
 }

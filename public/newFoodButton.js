@@ -105,6 +105,8 @@ export function filterFood() {
         localStorage.removeItem('commentSection');
         localStorage.setItem('filterValue',selection);
         localStorage.setItem('ImageUrl',img);
+        localStorage.removeItem('upvotes');
+        localStorage.removeItem('downvotes');
     })
 }
 
