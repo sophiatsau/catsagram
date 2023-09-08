@@ -1,0 +1,49 @@
+* {
+    --color-dark: #444B54;
+    --color-light: #FFF3C2;
+    --color-accent: #F98869;
+    box-sizing: border-box;
+}
+
+body {
+    /* background-color: var(--color-light); */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--color-dark);
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+    margin: 5px 0 0 0;
+    font-size: 40px;
+}
+
+#image-card,
+#newFoodContainer {
+    /* color: var(--color-dark); */
+    border: var(--color-accent) 4px double;
+    border-radius: 5em;
+    background-color: var(--color-light);
+}
+
+#upvoteScore,
+#downvoteScore {
+    font-weight: bold;
+    font-size: 40px;
+    transition: color 0.5s;
+}
+
+#newFoodContainer {
+    padding: 10px 20px;
+}
+
+img {
+    width: 100%;
+    border-radius: 5em;
+    padding: 10px;
+    margin: 0px;
+}

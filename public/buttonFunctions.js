@@ -5,9 +5,13 @@ export function setButtonFunctions() {
 
     popularity.addEventListener("click", clickEvent => {
         const vote = clickEvent.target.id
+        setTimeout(() => {
+            document.getElementById(vote+'Score').style.color = "#444B54";
+        }, 500);
         incrementScore(vote);
         playAudio(vote);
         scoreStorage();
+        // document.getElementById(vote+'Score').style.color = "#444B54";
     })
 }
 
@@ -16,6 +20,7 @@ function incrementScore(vote) {
     button.votes += 1;
     const score = document.getElementById(vote+'Score');
     score.innerText = button.votes;
+    score.style.color = "#F98869";
 }
 
 function playAudio(vote) {

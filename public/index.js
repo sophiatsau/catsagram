@@ -1,4 +1,3 @@
-
 import { createNewFoodContainer,createNewFoodButton, createFilterDropdown,filterFood,dropdownStorage } from "./newFoodButton.js";
 import { setButtonFunctions } from "./buttonFunctions.js";
 import { createCommentsSection, addComment } from "./comments.js";
@@ -43,18 +42,20 @@ async function setBody() {
 
     h1.innerText = mealName;
     mealImg.setAttribute("src", img);
+    div.setAttribute("id", "image-card")
 
     div.append(h1,mealImg);
     document.body.appendChild(div);
 
     // document.querySelectorAll("body *").forEach(child => child.style.boxSizing = "border-box");
 
-    document.body.style.display = "flex";
-    document.body.style.flexDirection = "column";
-    document.body.style.alignItems = "center";
-    h1.style.textAlign = "center";
-    mealImg.parentElement.style.border = "red 1px solid"
-    mealImg.style.margin = "5em";
+    //! CSS
+    // document.body.style.display = "flex";
+    // document.body.style.flexDirection = "column";
+    // document.body.style.alignItems = "center";
+    // h1.style.textAlign = "center";
+    // mealImg.parentElement.style.border = "red 1px solid"
+    // mealImg.style.margin = "5em";
 }
 
 /* BUTTONS
@@ -92,6 +93,7 @@ function createButtons() {
     upvoteDiv.append(upvoteScore,upvote);
     downvoteDiv.append(downvote,downvoteScore);
 
+    //! CSS
     popularity.style.display = 'flex';
     popularity.style.flexDirection = 'row';
     upvoteDiv.style.display = 'flex';
