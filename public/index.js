@@ -3,9 +3,6 @@ import { createNewFoodContainer,createNewFoodButton, createFilterDropdown,filter
 import { setButtonFunctions } from "./buttonFunctions.js";
 import { createCommentsSection, addComment } from "./comments.js";
 
-//import from comments
-//import from newFoodButton
-
 //food video, recipes on the sides?
 
 //get random image url
@@ -66,7 +63,6 @@ function createButtons() {
     const upvoteScore = document.createElement('p');
     const downvoteScore = document.createElement('p');
 
-
     upvote.innerText = "🤤";
     downvote.innerText = "🤮";
     upvoteScore.innerText = '0';
@@ -107,10 +103,6 @@ function createButtons() {
     downvote.style.boxSizing = "border-box";
 }
 
-// function createCommentsSection() {
-
-// }
-
 window.addEventListener('DOMContentLoaded', async () => {
     //set HTML elements
     setTitle();
@@ -120,6 +112,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     await createFilterDropdown();
     await createNewFoodButton();
     await createCommentsSection();
+
     //set event listeners
     setButtonFunctions();
     addComment();
