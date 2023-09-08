@@ -101,10 +101,10 @@ export function filterFood() {
 
         //resetting storage
         localStorage.removeItem('scoreData');
-        localStorage.removeItem('Heading');
+        localStorage.setItem('Heading',mealName);
         localStorage.removeItem('commentSection');
-        localStorage.removeItem('filterValue');
-        localStorage.removeItem('ImageUrl');
+        localStorage.setItem('filterValue',selection);
+        localStorage.setItem('ImageUrl',img);
     })
 }
 
