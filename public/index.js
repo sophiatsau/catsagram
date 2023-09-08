@@ -1,7 +1,8 @@
 
-import { createNewFoodContainer,createNewFoodButton, createFilterDropdown,filterFood } from "./newFoodButton.js";
+import { createNewFoodContainer,createNewFoodButton, createFilterDropdown,filterFood,dropdownStorage } from "./newFoodButton.js";
 import { setButtonFunctions } from "./buttonFunctions.js";
 import { createCommentsSection, addComment } from "./comments.js";
+import { buttonData } from "./buttonData.js";
 
 //food video, recipes on the sides?
 
@@ -112,9 +113,19 @@ window.addEventListener('DOMContentLoaded', async () => {
     await createFilterDropdown();
     await createNewFoodButton();
     await createCommentsSection();
+    MealStorage();
 
     //set event listeners
+    dropdownStorage();
     setButtonFunctions();
     addComment();
     filterFood();
 })
+
+function MealStorage() {
+    //capture meal values
+    const webImage = document.querySelector('img').getAttribute('src');
+    localStorage.setItem('ImageUrl',webImage);
+    const webHeading = document.querySelector('h1').innerText;
+    localStorage.setItem('Heading',webHeading);
+}

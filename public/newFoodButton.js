@@ -138,3 +138,10 @@ async function getRandomMealBasedOnFilter(selection) {
     return {img, mealName};
 
 }
+
+export function dropdownStorage() {
+    const dropdown = document.getElementById('dropdownFilter');
+    dropdown.addEventListener('change', e => {
+        localStorage.setItem('filterValue',dropdown.value);
+    })
+}

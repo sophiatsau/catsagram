@@ -7,6 +7,7 @@ export function setButtonFunctions() {
         const vote = clickEvent.target.id
         incrementScore(vote);
         playAudio(vote);
+        scoreStorage();
     })
 }
 
@@ -19,4 +20,9 @@ function incrementScore(vote) {
 
 function playAudio(vote) {
     buttonData[vote].audio.play();
+}
+
+export function scoreStorage() {
+    const scoreData = { 'upvote': buttonData.upvote.votes, 'downvote':buttonData.downvote.votes }
+    localStorage.setItem('scoreData',JSON.stringify(scoreData));
 }
