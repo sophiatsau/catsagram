@@ -82,3 +82,29 @@ export function addComment () {
     localStorage.setItem('commentSection', JSON.stringify(comments));
     })
 }
+
+export function createDeleteButton() {
+
+    const button = document.createElement('button');
+    button.setAttribute('id','deleteCommentButton');
+    button.innerText = 'Delete Last Comment';
+    document.body.append(button);
+
+}
+
+export function DeleteComment() {
+    const button = document.getElementById('deleteCommentButton');
+    button.addEventListener('click', e => {
+        const comments = document.querySelector('#comment-section');
+        if (comments.children.length) {
+        const length = comments.children.length;
+        const lastComment = comments.children[length-1];
+        lastComment.remove();
+        }
+        let commentStorage = localStorage.getItem('commentSection');
+        commentStorage = JSON.parse(commentStorage)
+        commentStorage.pop();
+        localStorage.setItem('commentSection',JSON.stringify(commentStorage));
+
+    })
+}
