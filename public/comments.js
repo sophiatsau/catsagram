@@ -63,5 +63,9 @@ export function addComment () {
     listItem.innerText = inputComment //store comment as text in <li> element
     listThing.append(listItem) //<ul>   <li></li>  </ul>
     inputText.value = ''; //reset to empty
+
+    let comments =Array.from(document.getElementsByClassName('comments'));
+    comments = comments.map(commentListItem => commentListItem.innerText)
+    localStorage.setItem('commentSection', JSON.stringify(comments));
     })
 }
