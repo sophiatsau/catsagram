@@ -60,6 +60,12 @@ async function setBody() {
 /* BUTTONS
 */
 function createButtons() {
+    //set upvoteCount and downvoteCount
+    let upvoteCount = localStorage.getItem("upvotes") || 0;
+    let downvoteCount = localStorage.getItem("downvotes") || 0;
+    buttonData.upvote.votes = Number(upvoteCount);
+    buttonData.downvote.votes = Number(downvoteCount);
+
     //add score counter
     const upvoteDiv = document.createElement('div');
     const downvoteDiv = document.createElement('div');
@@ -71,8 +77,9 @@ function createButtons() {
 
     upvote.innerText = "🤤";
     downvote.innerText = "🤮";
-    upvoteScore.innerText = '0';
-    downvoteScore.innerText = '0';
+    //should stringify whatever is in storage
+    upvoteScore.innerText = upvoteCount;
+    downvoteScore.innerText = downvoteCount;
 
     upvoteScore.setAttribute('id','upvoteScore');
     downvoteScore.setAttribute('id','downvoteScore');
