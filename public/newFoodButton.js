@@ -34,7 +34,7 @@ export function createFilterDropdown() {
 
     const all = document.createElement('OPTION');
         all.setAttribute('value','All');
-        all.selected=true;
+        // all.selected=true;
     const beef = document.createElement('option');
         beef.setAttribute('value','Beef');
     const breakfast = document.createElement('option');
@@ -63,6 +63,10 @@ export function createFilterDropdown() {
         vegetarian.setAttribute('value','Vegetarian');
 
     dropdown.append(all,beef,breakfast,chicken,dessert,goat,lamb,pasta,pork,seafood,side,appetizer,vegan,vegetarian);
+
+    const selection = localStorage.getItem("filterValue") || "All";
+    const selectedAttribute = document.querySelector(`[value=${selection}]`);
+    selectedAttribute.selected = true;
 
     for(let i=0;i<dropdown.children.length;i++) {
         let option = dropdown.children[i];
