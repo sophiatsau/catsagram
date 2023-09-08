@@ -30,7 +30,12 @@ function setTitle() {
 
 async function setBody() {
     //set h1 & image
-    const {img, mealName} = await randomMeal();
+    let img = localStorage.getItem("ImageUrl");
+    let mealName = localStorage.getItem("Heading");
+
+    if (img === null || mealName === null) {
+        ({img, mealName} = await randomMeal());
+    }
 
     const div = document.createElement("div");
     const h1 = document.createElement("h1");
