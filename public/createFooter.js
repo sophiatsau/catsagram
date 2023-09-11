@@ -11,10 +11,12 @@ export function createFooter() {
     peang.href = "https://github.com/pingno";
     apiSource.href = "https://www.themealdb.com/api.php";
 
+    [soph, sophia, peang, apiSource].forEach(a => a.setAttribute("target","_blank"))
+
     footer.innerText = "Brought to you by:";
-    soph.innerText = "Soph";
-    sophia.innerText = "Sophia";
-    peang.innerText = "Peang";
+    soph.innerText = "🥚 Soph";
+    sophia.innerText = "🥚 Sophia";
+    peang.innerText = "🥚 Peang";
     api.innerText = "API by:";
     apiSource.innerText = "TheMealDB";
 
