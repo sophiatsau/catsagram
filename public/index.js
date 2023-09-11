@@ -1,7 +1,8 @@
 import { createNewFoodContainer,createNewFoodButton, createFilterDropdown,filterFood,dropdownStorage } from "./newFoodButton.js";
 import { setButtonFunctions } from "./buttonFunctions.js";
-import { createCommentsSection, addComment, createDeleteButton, deleteComment } from "./comments.js";
+import { createCommentsSection, addComment, deleteComment } from "./comments.js";
 import { buttonData } from "./buttonData.js";
+import { createFooter } from "./createFooter.js";
 
 //food video, recipes on the sides?
 
@@ -117,7 +118,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     await createFilterDropdown();
     await createNewFoodButton();
     await createCommentsSection();
-    // await createDeleteButton();
+    createFooter();
     MealStorage();
 
     //set event listeners
