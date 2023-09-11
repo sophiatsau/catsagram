@@ -5,11 +5,14 @@
 //</form>
 //<ul id='comment-section'>
 //</ul>
+let nextCommentId;
+
 export async function createCommentsSection(){
     //<form>
     const form = document.createElement('form')
     const input = document.createElement('input') //<input>
     const button = document.createElement('button') //<button>
+    const heading = document.createElement('h2'); //comment section heading
     //</form>
     const list = document.createElement('ul')
     form.setAttribute('id', 'field')
@@ -21,19 +24,33 @@ export async function createCommentsSection(){
     document.body.append(form) //block
     form.append(input,button)
     document.body.append(list) //block
+    list.append(heading);
+    heading.innerText = "Connoisseurs' Opinions";
+    heading.style.margin = "5px";
+    heading.style.textDecoration = "underline double #F98869 1px"
 
     //restoring comments if refreshed
     let oldComments = localStorage.getItem('commentSection');
-    if (oldComments) {
-        let commentsArray = JSON.parse(oldComments);
-        commentsArray.forEach(comment => {
+
+    //if no storage yet, create empty storage for comments
+    if (!oldComments) {
+        localStorage.setItem('commentSection', '{}');
+        nextCommentId = 1;
+    }
+    //restore comments if refreshed
+    else {
+        const commentEntries = Object.entries(JSON.parse(oldComments));
+        nextCommentId = commentEntries.length+1;
+        for (let [id, text] of commentEntries) {
             let item = document.createElement('li');
             item.setAttribute('class','comments')
-            item.innerText = comment;
+            item.innerText = text;
+            item.id = id;
             list.append(item);
-        });
-
+            createDeleteButton(id, item);
+        }
     }
+
     //form styling
     form.style.border = "1px solid #F98869" // styling for form border
     form.style.display = 'flex'
@@ -49,20 +66,18 @@ export async function createCommentsSection(){
     button.style.border = 'transparent'
     //list styling
     list.style.listStyleType = 'none'
-    list.style.border = '1px solid #F98869'
-    list.style.width = '30%'
+    list.style.border = '4px double #F98869'
+    list.style.borderRadius = "5em"
+    // list.style.width = '30%'
     list.style.height = 'fit-content'
     list.style.fontFamily = 'sans-serif'
-    list.style.padding = "20px";
+    list.style.padding = "10px 50px";
     list.style.backgroundColor = "#FFF3C2";
     //input styling
     input.style.border = '.25px solid lightgrey'
     input.style.borderTopLeftRadius = '25px'
     input.style.borderBottomLeftRadius = '25px'
-    // list.style.display = 'flex'
-    // list.style.flexDirection = 'column'
-    // list.style.justifyContent = 'center'
-    // list.style.alignContent = 'center'
+
 }
 
 export function addComment () {
@@ -70,43 +85,60 @@ export function addComment () {
     const listThing = document.querySelector('#comment-section')
     formThing.addEventListener('submit', e => { //when someone submits a comment
         e.preventDefault(); //prevent page reload
-    const inputText = document.querySelector('#input-field') //grab input element
-    const inputComment = inputText.value //get value from input element and store into variable
-    const listItem = document.createElement('li') //create li element and store into list item
-    listItem.setAttribute('class', 'comments') //<li class='comments'>
-    listItem.style.alignContent = 'center'
-    listItem.innerText = inputComment //store comment as text in <li> element
-    listThing.append(listItem) //<ul>   <li></li>  </ul>
-    inputText.value = ''; //reset to empty
+        const inputText = document.querySelector('#input-field') //grab input element
+        const inputComment = inputText.value //get value from input element and store into variable
 
-    let comments =Array.from(document.getElementsByClassName('comments'));
-    comments = comments.map(commentListItem => commentListItem.innerText)
-    localStorage.setItem('commentSection', JSON.stringify(comments));
+        //don't add list item if there's no value
+        if (!inputComment) return;
+
+        const listItem = document.createElement('li') //create li element and store into list item
+        listItem.setAttribute('class', 'comments') //<li class='comments'>
+        listItem.style.alignContent = 'center';
+        listItem.innerText = inputComment //store comment as text in <li> element
+        listThing.append(listItem) //<ul>   <li></li>  </ul>
+        inputText.value = ''; //reset to empty
+
+        //assign identification to comments
+        const commentId = "comment-"+nextCommentId;
+        listItem.id = commentId;
+        nextCommentId++;
+
+        //add new comment to local storage
+        let currentComments = JSON.parse(localStorage.getItem("commentSection"));
+        currentComments[commentId] = inputComment;
+        localStorage.setItem("commentSection", JSON.stringify(currentComments));
+        createDeleteButton(commentId, listItem);
     })
 }
 
-export function createDeleteButton() {
-
+export function createDeleteButton(commentId, comment) {
     const button = document.createElement('button');
-    button.setAttribute('id','deleteCommentButton');
-    button.innerText = 'Delete Last Comment';
-    document.body.append(button);
+    button.setAttribute('id',`delete-${commentId}`);
+    button.style.visibility = "hidden";
+    button.innerText = 'Delete';
+    comment.append(button);
 
+    //create listener for showing button
+    comment.addEventListener("mouseover", e => {
+        button.style.visibility = "visible";
+    });
+    comment.addEventListener("mouseleave", e => {
+        button.style.visibility = "hidden";
+    })
 }
 
-export function DeleteComment() {
-    const button = document.getElementById('deleteCommentButton');
-    button.addEventListener('click', e => {
-        const comments = document.querySelector('#comment-section');
-        if (comments.children.length) {
-        const length = comments.children.length;
-        const lastComment = comments.children[length-1];
-        lastComment.remove();
-        }
-        let commentStorage = localStorage.getItem('commentSection');
-        commentStorage = JSON.parse(commentStorage)
-        commentStorage.pop();
-        localStorage.setItem('commentSection',JSON.stringify(commentStorage));
+export function deleteComment() {
+    const commentSection = document.getElementById('comment-section');
+    commentSection.addEventListener('click', e => {
+        if (e.target.id && e.target.id.startsWith("delete-comment")) {
+            //remove comment from storage
+            const comment = e.target.parentElement;
+            let storedComments = JSON.parse(localStorage.getItem("commentSection"));
+            delete storedComments[comment.id];
+            localStorage.setItem("commentSection", JSON.stringify(storedComments));
 
+            //remove comment from page
+            comment.remove();
+        }
     })
 }

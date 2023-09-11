@@ -47,3 +47,22 @@ img {
     padding: 10px;
     margin: 0px;
 }
+
+li {
+    margin: 5px;
+}
+
+.comments {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* .comments > button {
+    visibility: hidden;
+} */
+
+/* .comments:hover {
+    button {
+        visibility: visible;
+    }
+} */
